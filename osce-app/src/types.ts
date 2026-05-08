@@ -3,13 +3,14 @@ export interface StudentScores {
 }
 
 export interface AssessmentData {
-  studentId: number;
-  studentName: string;
+  firstName: string;
+  surname: string;
+  payNumber: string;
   date: string;
   assessorName: string;
   scores: StudentScores;
 }
 
 export type AllAssessments = {
-  [studentId: number]: AssessmentData;
+  [payNumber: string]: AssessmentData;
 };
