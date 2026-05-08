@@ -7,6 +7,7 @@ interface Props {
   scores: StudentScores;
   onExportCSV: () => void;
   onExportJSON: () => void;
+  onExportPDF: () => void;
   onClearScores: () => void;
 }
 
@@ -22,7 +23,7 @@ const BADGE_COLORS: Record<RAGColor, string> = {
   red: 'bg-red-100 text-red-800 border-red-300',
 };
 
-export default function ScoreSummary({ results, scores, onExportCSV, onExportJSON, onClearScores }: Props) {
+export default function ScoreSummary({ results, scores, onExportCSV, onExportJSON, onExportPDF, onClearScores }: Props) {
   const total = calcTotalWeightedScore(scores);
   const totalPct = TOTAL_WEIGHT > 0 ? (total / TOTAL_WEIGHT) * 100 : 0;
   const color = scoreColor(totalPct);
@@ -61,22 +62,28 @@ export default function ScoreSummary({ results, scores, onExportCSV, onExportJSO
       {/* Actions */}
       <div className="flex flex-wrap gap-2 mt-4 pt-3 border-t border-gray-100">
         <button
+          onClick={onExportPDF}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition-colors"
+        >
+          \u2193 Export PDF
+        </button>
+        <button
           onClick={onExportCSV}
           className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
         >
-          ↓ Export CSV
+          \u2193 Export CSV
         </button>
         <button
           onClick={onExportJSON}
           className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition-colors"
         >
-          ↓ Export JSON
+          \u2193 Export JSON
         </button>
         <button
           onClick={onClearScores}
           className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-colors"
         >
-          ✕ Clear Scores
+          \u2715 Clear Scores
         </button>
       </div>
     </div>
